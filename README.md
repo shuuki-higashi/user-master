@@ -3,11 +3,11 @@
 # Usage 
 ## Preparation
 - ssh
-git clone git@github.com:kkiyama117/express_docker.git
+`git clone git@github.com:kkiyama117/express_docker.git`
 - http
-git clone https://github.com/kkiyama117/express_docker.git
+`git clone https://github.com/kkiyama117/express_docker.git`
 - download
-you can download from [here](https://github.com/kkiyama117/express_docker/archive/master.zip)
+-> you can download from [here](https://github.com/kkiyama117/express_docker/archive/master.zip)
 
 ### docker
 If you use Docker, You should install Docker and Docker-compose

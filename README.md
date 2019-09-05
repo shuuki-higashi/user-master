@@ -28,13 +28,15 @@ cd $PROJECT_ROOT
 # (Please replace $PROJECT_ROOT with Download folder of this repository)
 yarn
 yarn start
-#(you can close this server by ctrl-C)
+# see HP with browser in `localhost:3000`
+# (you can close this server by ctrl-C)
 ``` 
 
 ## for prod
 1. use docker
 ```$bash
 sudo docker-compose up
+# see HP with browser in `localhost`
 # You can close it by Ctrl-C
 ```
 

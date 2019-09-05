@@ -1,9 +1,28 @@
 version: '3'
 services:
-  app:
-    image: node:latest
-    ports:
-      - $PORT:$PORT
+  server:
+    image: nginx
     volumes:
-      - ./:/src
-    working_dir: /src
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - express
+    links:
+      - express
+    environment:
+      NGINX_PORT: 80
+
+  express:
+    tty: true
+    stdin_open: true
+    image: node:alpine
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+    working_dir: /app
+    environment:
+      NODE_ENV: development
+    command: node bin/www

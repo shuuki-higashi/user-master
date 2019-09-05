@@ -28,7 +28,7 @@ cd $PROJECT_ROOT
 # (Please replace $PROJECT_ROOT with Download folder of this repository)
 yarn
 yarn start
-# see HP with browser in `localhost:3000`
+# see HP with browser in `localhost:8080`
 # (you can close this server by ctrl-C)
 ``` 
 

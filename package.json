@@ -1,14 +1,23 @@
 {
-  "name": "express-docker",
-  "version": "0.0.0",
+  "name": "express-docker-sample",
+  "version": "0.0.1",
   "private": true,
+  "author": "Kouhei Kiyama <k.kiyama117@gmail> (https://github.com/kkiyama117/)",
+  "license": "UNLICENSED",
+  "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "production": "sudo docker-compose up",
+    "production_stop": "sudo docker-compose down"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "morgan": "~1.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:kkiyama117/express_docker.git"
   }
 }

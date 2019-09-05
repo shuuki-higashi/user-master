@@ -43,3 +43,5 @@ yarn stage
 # You can close it by Ctrl-C
 ```
 
+# 今後の参考になりそうなもの
+https://qiita.com/leafia78/items/73cc7160d002a4989416

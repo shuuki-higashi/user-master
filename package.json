@@ -7,6 +7,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node ./bin/www",
+    "test": "mocha",
     "stage": "sudo docker-compose -f docker/docker-compose.yml up",
     "stage_stop": "sudo docker-compose -f docker/docker-compose.yml down",
     "production": "sudo docker-compose -f docker/docker-compose.prod.yml up",
@@ -22,5 +23,8 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:kkiyama117/express_docker.git"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
   }
 }

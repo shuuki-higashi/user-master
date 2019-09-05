@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   server:
     image: nginx
@@ -13,28 +13,41 @@ services:
       - express
     environment:
       NGINX_PORT: 80
+    networks:
+      - view
 
   express:
     tty: true
     stdin_open: true
-    image: node:latest
+    image: node:alpine
+    init: true
     ports:
       - "3000:3000"
     volumes:
-      - ./:/src
-    working_dir: /src
-    command: node bin/www
+      - ../:/app
+    working_dir: /app
+    environment:
+      NODE_ENV: production
+    command: ['bin/www']
+    networks:
+      - db
+      - view
 
   db:
-    image: postgres
+    image: mysql
     environment:
-      POSTGRES_DB: test_db
-      POSTGRES_USER: db
-      POSTGRES_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: docker_mysql
+      MYSQL_PASSWORD: docker_db_pass
+      TZ: 'Asia/Tokyo'
     expose:
-      - "5432"
+      - "3306"
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - db_data:/var/lib/mysql
     networks:
-      - back
+      - db
 #  redis:
 #    image: redis
 #    networks:
@@ -44,9 +57,10 @@ services:
 #      volumes:
 #        - redis:/data
 
-#volumes:
+volumes:
+  db_data:
 #  redis:
 
 networks:
-  front:
-  back:
+  view:
+  db:

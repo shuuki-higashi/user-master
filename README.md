@@ -33,9 +33,12 @@ yarn start
 ``` 
 
 ## for prod
-1. use docker
+1. install yarn(or npm) (same with Above)
+2. use docker from command
 ```$bash
-sudo docker-compose up
+cd $PROJECT_ROOT
+yarn stage
+# sudo docker-compose -f docker/docker-compose.yml up
 # see HP with browser in `localhost`
 # You can close it by Ctrl-C
 ```

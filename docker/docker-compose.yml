@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   server:
     image: nginx
@@ -18,11 +18,12 @@ services:
     tty: true
     stdin_open: true
     image: node:alpine
+    init: true
     ports:
       - "3000:3000"
     volumes:
-      - ./:/app
+      - ../:/app
     working_dir: /app
     environment:
       NODE_ENV: development
-    command: node bin/www
+    command: ['bin/www']

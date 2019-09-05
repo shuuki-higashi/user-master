@@ -27,6 +27,7 @@ Also See https://qiita.com/suisui654/items/1b89446e03991c7c2c3d
 cd $PROJECT_ROOT
 # (Please replace $PROJECT_ROOT with Download folder of this repository)
 yarn
+# create `.env` file in Project_root and write `PORT=3000` if you change server port to 3000
 yarn start
 # see HP with browser in `localhost:8080`
 # (you can close this server by ctrl-C)
@@ -37,6 +38,7 @@ yarn start
 2. use docker from command
 ```$bash
 cd $PROJECT_ROOT
+# create `.env` file in Project_root and write `PORT=3000` if you change server port to 3000
 yarn stage
 # sudo docker-compose -f docker/docker-compose.yml up
 # see HP with browser in `localhost`

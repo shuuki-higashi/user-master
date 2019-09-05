@@ -62,3 +62,5 @@ typings/
 
 # Editor
 .idea
+
+docker/nginx/default.conf

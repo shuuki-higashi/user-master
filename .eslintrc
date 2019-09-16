@@ -1,18 +1,25 @@
 {
   "env": {
-    // "es6": true,
+    "es6": true,
     "node": true
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     // prettier は最後に書く
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
   ],
   "plugins": [
-    "node"
+    "node",
+    "@typescript-eslint"
   ],
   "rules": {
     //`module.exports`と`exports.*`を混ぜて使うと警告します。

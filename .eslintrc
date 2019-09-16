@@ -38,6 +38,8 @@
     "node/process-exit-as-throw": "error",
     //シバンの誤りを指摘します。
     "node/shebang": "error",
+    // switch 文 indent
+    "indent": ["error", 2, {"SwitchCase": 1}],
     // prettier
     "prettier/prettier": [
       "error",

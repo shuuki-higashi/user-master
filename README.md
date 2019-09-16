@@ -1,16 +1,12 @@
-# [Gijiroku_express](https://github.com/kkiyama117/gijiroku_express)
-## 設計/画面遷移図
-https://drive.google.com/file/d/1fQqJ_w7CRZdtDzj2B6--UwAPleqpxlEi/view
-## 開発フロー
-[(仮)](http://kyoino.sakura.ne.jp/kids/?project/development_flow)
+# [express_docker template]()
 
 # Usage 
 ## Preparation
 ### repo
 - ssh
-`git clone git@github.com:kkiyama117/gijiroku_express.git`
+`git clone git@github.com:kkiyama117/express_docker.git`
 - http
-`git clone https://github.com/kkiyama117/gijirok_express.git`
+`git clone https://github.com/kkiyama117/express_docker.git`
 
 ### docker
 If you use Docker, You should install Docker and Docker-compose

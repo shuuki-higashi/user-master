@@ -18,26 +18,9 @@
     "prettier/@typescript-eslint"
   ],
   "plugins": [
-    "node",
     "@typescript-eslint"
   ],
   "rules": {
-    //`module.exports`と`exports.*`を混ぜて使うと警告します。
-    "node/exports-style": "error",
-    //Node.jsの非推奨APIを使用すると警告します。
-    "node/no-deprecated-api": "error",
-    //`require()`で存在しないファイルを読もうとすると警告します。
-    "node/no-missing-require": "error",
-    //CLIのエントリポイントが無視リストに入っていた場合に警告します。
-    "node/no-unpublished-bin": "error",
-    //`require()`で公開後に読めなくなるモジュールを読もうとすると警告します。
-    "node/no-unpublished-require": "error",
-    //指定したNode.jsのバージョンでサポートされていない構文を使おうとすると警告します。
-    "node/no-unsupported-features": "error",
-    //`process.exit()`の実行パスを修正します。
-    "node/process-exit-as-throw": "error",
-    //シバンの誤りを指摘します。
-    "node/shebang": "error",
     // switch 文 indent
     "indent": ["error", 2, {"SwitchCase": 1}],
     // prettier

@@ -1,5 +1,6 @@
-const express = require('express');
-const router = express.Router();
+import * as Express from 'express';
+
+const router = Express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {

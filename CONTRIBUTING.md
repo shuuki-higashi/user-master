@@ -1,7 +1,7 @@
-# Contributing to [this repo](https://github.com/kkiyama117/gijiroku_express)
+# Contributing to [this repo](https://github.com/kkiyama117/express_docker)
 Pull Request(以下, PR)を送る際に注意する事一覧
 ## README
-[README](https://github.com/kkiyama117/gijiroku_express/blob/master/README.md)
+[README](https://github.com/kkiyama117/express_docker/blob/master/README.md)
 は必要に応じて更新されるべき
 ユーザーの導入時の作業や開発更新時に必要な手順がある場合は記載する
 

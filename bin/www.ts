@@ -12,15 +12,14 @@ debug('ts-express:server');
 /**
  * Normalize a port into a number, string, or false.
  */
-
-function normalizePort(val: number | string): number | string | boolean {
+const normalizePort = (val: number | string): number | string | boolean => {
   const port: number = typeof val === 'string' ? parseInt(val, 10) : val;
   // named pipe
   if (isNaN(port)) return val;
   // port number
   else if (port >= 0) return port;
   else return false;
-}
+};
 
 /**
  * Get port from environment and store in Express.
@@ -38,16 +37,11 @@ const server = http.createServer(app);
  */
 
 server.listen(port);
-// eslint-disable-next-line @typescript-eslint/no-use-before-define
-server.on('error', onError);
-// eslint-disable-next-line @typescript-eslint/no-use-before-define
-server.on('listening', onListening);
 
 /**
  * Event listener for HTTP server "error" event.
  */
-
-function onError(error: NodeJS.ErrnoException): void {
+server.on('error', (error: NodeJS.ErrnoException): void => {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -67,13 +61,12 @@ function onError(error: NodeJS.ErrnoException): void {
     default:
       throw error;
   }
-}
+});
 
 /**
  * Event listener for HTTP server "listening" event.
  */
-
-function onListening(): void {
+server.on('listening', (): void => {
   const addr = server.address();
   let bind: string;
   if (typeof addr === 'string') {
@@ -84,4 +77,4 @@ function onListening(): void {
     bind = '';
   }
   debug(`Listening on ${bind}`);
-}
+});

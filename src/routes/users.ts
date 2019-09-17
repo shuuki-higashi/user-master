@@ -9,4 +9,4 @@ router.get('/', (req: Request, res: Response, next: NextFunction) =>
   res.send('respond with a resource')
 );
 
-export { router };
+export default router;

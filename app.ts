@@ -1,10 +1,10 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import logger from 'morgan';
+import express from 'express';
+import cookieParser from 'cookie-parser';
 
-const indexRouter = require('./src/routes');
-const usersRouter = require('./src/routes/users');
+import indexRouter from './src/routes';
+import usersRouter from './src/routes/users';
+import * as path from 'path';
 
 const app = express();
 

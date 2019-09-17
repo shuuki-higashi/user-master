@@ -3,12 +3,12 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id!: number;
+  readonly id!: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255 })
   firstName: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255 })
   lastName: string;
 
   constructor(firstName: string, lastName: string) {

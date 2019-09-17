@@ -65,3 +65,4 @@ typings/
 
 docker/nginx/default.conf
 dist
+*.sqlite*

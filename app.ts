@@ -2,12 +2,12 @@ import logger from 'morgan';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { NextFunction, Request, Response } from 'express';
 
 import indexRouter from './src/routes';
 import usersRouter from './src/routes/users';
 import * as path from 'path';
 import halMiddleware from './src/middlewares/addHeaders';
+import errorMiddleware from './src/middlewares/error';
 
 const app = express();
 
@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // Add HAL header
 app.use(halMiddleware);
+app.use(errorMiddleware);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

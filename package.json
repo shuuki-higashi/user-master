@@ -13,9 +13,10 @@
   },
   "main": "app.ts",
   "scripts": {
-    "dev": "ts-node bin/www.ts",
+    "dev": "nodemon -L",
+    "start": "tsc && node dist/bin/www.js",
     "test": "mocha",
-    "lint": "eslint --fix 'src/**/*.ts' 'test/**/*.ts'",
+    "lint": "eslint --fix 'src/**/*.ts' 'test/**/*.ts' 'bin/**/*.ts' app.ts",
     "stage": "sudo docker-compose -f docker/docker-compose.yml up",
     "stage_stop": "sudo docker-compose -f docker/docker-compose.yml down",
     "production": "sudo docker-compose -f docker/docker-compose.prod.yml up",

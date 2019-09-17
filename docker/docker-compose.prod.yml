@@ -32,7 +32,7 @@ services:
     working_dir: /app
     environment:
       NODE_ENV: production
-    command: ['yarn', 'dev']
+    command: ['yarn', 'start']
     networks:
       - db
       - view

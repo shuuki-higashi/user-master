@@ -6,7 +6,9 @@ const router = Router();
 /* GET home page. */
 router.get('/', (req: Request, res: Response) => {
   // router.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.send('index');
+  res.json({
+    message: 'test',
+  });
 });
 
 export default router;

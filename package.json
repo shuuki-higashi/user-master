@@ -63,5 +63,11 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "**/*.d.ts",
+    "build/**/*.js",
+    "dist/**/*.js"
+  ]
 }

@@ -16,4 +16,5 @@ const ORMConfig = {
   namingStrategy: new TypeOrmNamingStrategy(),
 };
 
-export default ORMConfig;
+// typeORM の雑魚設定に合わせる
+export = ORMConfig;

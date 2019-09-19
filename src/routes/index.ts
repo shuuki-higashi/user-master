@@ -1,13 +1,18 @@
 import { NextFunction, Response, Request, Router } from 'express';
+import users from './users';
+import auth from './auth';
 
-const router = Router();
+const routes = Router();
 
 /* GET home page. */
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
+routes.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.json({
     message: 'test',
   });
   next();
 });
 
-export default router;
+// all other routes
+routes.use('/users', users);
+routes.use('/auth', auth);
+export default routes;

@@ -16,20 +16,33 @@
     "dev": "nodemon -L",
     "start": "tsc && node dist/bin/www.js",
     "test": "mocha",
-    "lint": "eslint --fix 'src/**/*.ts' 'test/**/*.ts' 'bin/**/*.ts' app.ts",
+    "lint": "eslint --fix 'src/**/*.ts' 'test/**/*.ts' 'bin/**/*.ts' app.ts ormconfig.ts",
     "watch": "tsc -w",
     "stage": "sudo docker-compose -f docker/docker-compose.yml up",
     "stage_stop": "sudo docker-compose -f docker/docker-compose.yml down",
     "production": "sudo docker-compose -f docker/docker-compose.prod.yml up",
-    "production_stop": "sudo docker-compose -f docker/docker-compose.prod.yml down"
+    "production_stop": "sudo docker-compose -f docker/docker-compose.prod.yml down",
+    "typeorm": "ts-node ./node_modules/typeorm/cli",
+    "migration:generate": "yarn typeorm migration:generate",
+    "migration:run": "yarn typeorm migration:run"
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.6",
+    "@types/helmet": "^0.0.44",
+    "@types/jsonwebtoken": "^8.3.4",
+    "bcryptjs": "^2.4.3",
+    "class-validator": "^0.10.0",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.1.0",
     "express": "~4.16.1",
+    "helmet": "^3.21.0",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "mysql2": "^1.7.0",
+    "pluralize": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^4.1.0",
     "ts-node": "^8.4.1",
@@ -42,6 +55,7 @@
     "@types/express": "^4.17.1",
     "@types/morgan": "^1.7.37",
     "@types/node": "^12.7.5",
+    "@types/pluralize": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "eslint": "^6.4.0",
@@ -70,6 +84,7 @@
     "node_modules",
     "**/*.d.ts",
     "build/**/*.js",
-    "dist/**/*.js"
+    "dist/**/*.js",
+    "src/migration/**/*.ts"
   ]
 }

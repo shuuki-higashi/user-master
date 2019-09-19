@@ -1,28 +1,36 @@
-import { NextFunction, Request, Response } from 'express';
+import { Router } from 'express';
+import UserController from '../controllers/UserController';
+import { checkJwt } from '../middlewares/checkJwt';
+import { checkRole } from '../middlewares/checkRole';
 
-import express from 'express';
-import { GetUser } from '../index';
-import { User } from '../entity/User';
+const router = Router();
 
-const router = express.Router();
+//Get all users
+router.get('/', [checkJwt, checkRole(['ADMIN'])], UserController.listAll);
 
-/* GET users listing. */
-router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  const user = await GetUser(1);
-  if (user == null) {
-    res.send('');
-  } else {
-    res.json({
-      _links: {
-        self: { href: '/users' },
-        'ea:find': {
-          href: `/users/${user.id}`,
-        },
-      },
-      user: user,
-    });
-  }
-  next();
-});
+// Get one user
+router.get(
+  '/:id([0-9]+)',
+  [checkJwt, checkRole(['ADMIN'])],
+  UserController.getOneById
+);
+
+//Create a new user
+router.post('/', [checkJwt, checkRole(['ADMIN'])], UserController.newUser);
+router.post('/new', [checkJwt, checkRole(['ADMIN'])], UserController.newUser);
+
+//Edit one user
+router.patch(
+  '/:id([0-9]+)',
+  [checkJwt, checkRole(['ADMIN'])],
+  UserController.editUser
+);
+
+//Delete one user
+router.delete(
+  '/:id([0-9]+)',
+  [checkJwt, checkRole(['ADMIN'])],
+  UserController.deleteUser
+);
 
 export default router;

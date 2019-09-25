@@ -4,18 +4,21 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
-import { IsNotEmpty, Length } from 'class-validator';
+import { Length } from 'class-validator';
 import * as bcrypt from 'bcryptjs';
+import { Role } from './Role';
 
 interface UserInterface {
   firstName: string;
   lastName: string;
-  role: string;
+  roles: Array<Role>;
   password: string;
 }
 
-@Entity('users')
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   readonly id!: number;
@@ -33,10 +36,6 @@ export class User {
   password!: string;
 
   @Column()
-  @IsNotEmpty()
-  role: string;
-
-  @Column()
   @CreateDateColumn()
   readonly createdAt!: Date;
 
@@ -44,11 +43,16 @@ export class User {
   @UpdateDateColumn()
   updatedAt!: Date;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @ManyToMany(type => Role)
+  @JoinTable()
+  roles?: Array<Role> | null;
+
   constructor(obj?: UserInterface) {
     this.firstName = (obj && obj.firstName) || '';
     this.lastName = (obj && obj.lastName) || '';
-    this.role = (obj && obj.role) || 'NORMAL';
     this.password = (obj && obj.password) || '';
+    this.roles = (obj && obj.roles) || null;
   }
 
   checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean {

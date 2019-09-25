@@ -10,7 +10,7 @@ class UserController {
     //Get users from database
     const userRepository = getRepository(User);
     const users = await userRepository.find({
-      select: ['id', 'firstName', 'lastName', 'role'], //We dont want to send the passwords on response
+      select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the passwords on response
     });
 
     //Send the users object
@@ -25,7 +25,7 @@ class UserController {
     const userRepository = getRepository(User);
     try {
       const user = await userRepository.findOneOrFail(id, {
-        select: ['id', 'firstName', 'lastName', 'role'], //We dont want to send the password on response
+        select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the password on response
       });
     } catch (error) {
       res.status(404).send('User not found');
@@ -34,8 +34,8 @@ class UserController {
 
   static newUser = async (req: Request, res: Response): Promise<void> => {
     //Get parameters from the body
-    const { firstName, lastName, password, role } = req.body;
-    const user = new User({ firstName, lastName, role, password });
+    const { firstName, lastName, password, roles } = req.body;
+    const user = new User({ firstName, lastName, roles, password });
 
     //Validate if the parameters are ok
     const errors = await validate(user);
@@ -65,7 +65,7 @@ class UserController {
     const id = req.params.id;
 
     //Get values from the body
-    const { firstName, lastName, role } = req.body;
+    const { firstName, lastName, roles } = req.body;
 
     //Try to find user on database
     const userRepository = getRepository(User);
@@ -81,7 +81,7 @@ class UserController {
     //Validate the new values on model
     user.firstName = firstName;
     user.lastName = lastName;
-    user.role = role;
+    user.roles = roles;
     const errors = await validate(user);
     if (errors.length > 0) {
       res.status(400).send(errors);

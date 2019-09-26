@@ -31,7 +31,7 @@ export class User {
   @Length(4, 20)
   lastName: string;
 
-  @Column({ name: 'password' })
+  @Column({ name: 'password', select: false })
   @Length(4, 100)
   password!: string;
 

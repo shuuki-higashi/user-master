@@ -17,13 +17,20 @@ class AuthController {
 
     //Get user from database
     const userRepository = getRepository(User);
-    let user!: User;
+    let user!: User | undefined;
     try {
-      user = await userRepository.findOneOrFail({
-        where: { firstName: firstName, lastName: lastName },
-      });
+      user = await userRepository
+        .createQueryBuilder('User')
+        .addSelect('User.password')
+        .where({ firstName: firstName, lastName: lastName })
+        .getOne();
     } catch (error) {
-      res.status(401).send();
+      res.status(401).send('user not ');
+    }
+
+    if (user === undefined) {
+      res.status(404).send();
+      return;
     }
 
     //Check if encrypted password match
@@ -58,11 +65,19 @@ class AuthController {
 
     //Get user from the database
     const userRepository = getRepository(User);
-    let user!: User;
+    let user!: User | undefined;
     try {
-      user = await userRepository.findOneOrFail(id);
+      user = await userRepository
+        .createQueryBuilder('User')
+        .addSelect('User.password')
+        .where(id)
+        .getOne();
     } catch (id) {
       res.status(401).send();
+    }
+    if (user === undefined) {
+      res.status(404).send();
+      return;
     }
 
     //Check if old password matchs

@@ -9,12 +9,17 @@ class UserController {
   static listAll = async (req: Request, res: Response): Promise<void> => {
     //Get users from database
     const userRepository = getRepository(User);
-    const users = await userRepository.find({
-      select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the passwords on response
-    });
-
-    //Send the users object
-    res.send(users);
+    try {
+      const users = await userRepository.find({
+        select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the passwords on response
+      });
+      //Send the users object
+      res.send(users);
+      return;
+    } catch (e) {
+      res.status(404).send('users not found');
+      return;
+    }
   };
 
   static getOneById = async (req: Request, res: Response): Promise<void> => {
@@ -24,12 +29,11 @@ class UserController {
     //Get the user from database
     const userRepository = getRepository(User);
     try {
-      const user = await userRepository.findOneOrFail(id, {
-        select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the password on response
-      });
+      const user = await userRepository.findOneOrFail(id);
       res.send(user);
     } catch (error) {
-      res.status(404).send('User not found');
+      res.status(404).send(`User ${id} not found because ${error}`);
+      return;
     }
   };
 
@@ -75,7 +79,7 @@ class UserController {
       user = await userRepository.findOneOrFail(id);
     } catch (error) {
       //If not found, send a 404 response
-      res.status(404).send('User not found');
+      res.status(404).send('User to edit not found');
       return;
     }
 
@@ -109,7 +113,7 @@ class UserController {
     try {
       user = await userRepository.findOneOrFail(id);
     } catch (error) {
-      res.status(404).send('User not found');
+      res.status(404).send('User to delete not found');
       return;
     }
     await userRepository.delete(id);

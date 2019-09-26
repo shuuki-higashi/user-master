@@ -31,15 +31,15 @@ export class User {
   @Length(4, 20)
   lastName: string;
 
-  @Column()
+  @Column({ name: 'password' })
   @Length(4, 100)
   password!: string;
 
-  @Column()
+  @Column({ name: 'created_at' })
   @CreateDateColumn()
   readonly createdAt!: Date;
 
-  @Column()
+  @Column({ name: 'updated_at' })
   @UpdateDateColumn()
   updatedAt!: Date;
 

@@ -34,7 +34,7 @@ class AuthController {
 
     //Sing JWT, valid for 1 hour
     const token = jwt.sign(
-      { userId: user.id, firstName: user.firstName, lastName: user.lastName },
+      { id: user.id, firstName: user.firstName, lastName: user.lastName },
       config.jwtSecret,
       { expiresIn: '1h' }
     );
@@ -48,7 +48,7 @@ class AuthController {
     res: Response
   ): Promise<void> => {
     //Get ID from JWT
-    const id = res.locals.jwtPayload.userId;
+    const id = res.locals.jwtPayload.id;
 
     //Get parameters from the body
     const { oldPassword, newPassword } = req.body;

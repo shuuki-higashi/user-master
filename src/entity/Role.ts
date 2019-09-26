@@ -5,7 +5,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToMany,
-  JoinTable,
 } from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
 import { User } from './User';
@@ -19,7 +18,7 @@ export class Role {
   @PrimaryGeneratedColumn()
   readonly id!: number;
 
-  @Column()
+  @Column({ name: 'role' })
   @IsNotEmpty()
   role: string;
 
@@ -27,11 +26,11 @@ export class Role {
   @ManyToMany(type => User, user => user.roles)
   users?: Array<User> | undefined;
 
-  @Column()
+  @Column({ name: 'created_at' })
   @CreateDateColumn()
   readonly createdAt!: Date;
 
-  @Column()
+  @Column({ name: 'updated_at' })
   @UpdateDateColumn()
   updatedAt!: Date;
 

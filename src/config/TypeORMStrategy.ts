@@ -31,7 +31,9 @@ class TypeOrmNamingStrategy extends DefaultNamingStrategy {
   joinTableName(
     firstTableName: string,
     secondTableName: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     firstPropertyName: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     secondPropertyName: string
   ): string {
     return snakeCase(firstTableName + '_' + secondTableName);

@@ -30,16 +30,16 @@ export const checkRole = (
     try {
       user = await userRepository.findOneOrFail(id);
     } catch (id) {
-      res.status(401).send();
+      res.status(401).send('Not found login user id');
     }
 
     //Check if array of authorized roles includes the user's role
     if (user.roles === null || typeof user.roles === 'undefined') {
-      res.status(401).send();
+      res.status(401).send(`Role undefined ${user.roles}`);
     } else {
       user.roles.forEach((item: Role) => {
         if (roleTypes.indexOf(item.role) > -1) next();
-        else res.status(401).send();
+        else res.status(401).send('Access not allowed with this role');
       });
     }
   };

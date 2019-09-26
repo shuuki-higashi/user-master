@@ -1,6 +1,7 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 
 const errorMiddleware: ErrorRequestHandler = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   err: any,
   req: Request,
   res: Response,

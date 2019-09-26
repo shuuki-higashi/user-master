@@ -44,15 +44,15 @@ export class User {
   updatedAt!: Date;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToMany(type => Role)
+  @ManyToMany(type => Role, role => role.users, { cascade: true })
   @JoinTable()
-  roles?: Array<Role> | null;
+  roles?: Array<Role>;
 
   constructor(obj?: UserInterface) {
     this.firstName = (obj && obj.firstName) || '';
     this.lastName = (obj && obj.lastName) || '';
     this.password = (obj && obj.password) || '';
-    this.roles = (obj && obj.roles) || null;
+    this.roles = obj && obj.roles;
   }
 
   checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean {

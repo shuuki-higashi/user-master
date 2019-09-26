@@ -27,6 +27,7 @@ class UserController {
       const user = await userRepository.findOneOrFail(id, {
         select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the password on response
       });
+      res.send(user);
     } catch (error) {
       res.status(404).send('User not found');
     }
@@ -114,7 +115,7 @@ class UserController {
     await userRepository.delete(id);
 
     //After all send a 204 (no content, but accepted) response
-    res.status(204).send();
+    res.status(204).send(user);
   };
 }
 

@@ -72,6 +72,7 @@
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
     "tsdoc": "^0.0.4",
+    "typeorm-factory": "^0.0.13",
     "typescript": "^3.6.3"
   },
   "lint-staged": {

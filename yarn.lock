@@ -5881,6 +5881,11 @@ type-is@~1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
+typeorm-factory@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/typeorm-factory/-/typeorm-factory-0.0.13.tgz#c1ca2dd928c0d24df5f3e8155be163c6e08ea20b"
+  integrity sha512-2rUsSPHnA1xG9oNdk1sW7pvb0cl3j8AQCIkDOgOKFblJb3aK4dp8zK0GkA6/uEUDzXpN0mCOk3sgnCFCMkD2WQ==
+
 typeorm@^0.2.19:
   version "0.2.19"
   resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.19.tgz#a0cff0714180e5720df157df02c5759a1a646dc3"

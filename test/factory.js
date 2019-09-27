@@ -1,11 +1,12 @@
-// import { Factory } from 'typeorm-factory'
+import { Factory } from 'typeorm-factory';
+import { User } from '../src/entity/User';
 // エンティティ(モデル)のComment, Author, Postもインポートしておく
 
 // .attr → 普通のカラムはこれで作ります
 // .secuence → ユニーク成約等があるカラムの場合はindexを受取る無名関数を使って一意化出来ます
-// export const CommentFactory = new Factory(Comment)
-//     .sequence("text", (i) => `text ${i}`)
-//     .attr("authorName", "John Doe");
+export const UserFactory = new Factory(User)
+  .sequence('text', i => `text ${i}`)
+  .attr('firstName', 'John').a;
 
 // export const AuthorFactory = new Factory(Author)
 //     .sequence("firstName", (i) => `John ${i}`)

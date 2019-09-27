@@ -7,7 +7,7 @@ import helmet from 'helmet';
 
 import routes from './src/routes';
 import * as path from 'path';
-import halMiddleware from './src/middlewares/addHeaders';
+import halMiddleware from './src/middlewares/addHALHeaders';
 import errorMiddleware from './src/middlewares/error';
 import { createConnection } from 'typeorm';
 

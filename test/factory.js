@@ -4,12 +4,12 @@ import { Role } from '../src/entity/Role';
 
 // .attr → 普通のカラムはこれで作ります
 // .sequence → ユニーク成約等があるカラムの場合はindexを受取る無名関数を使って一意化出来ます
-export const authFactory = new Factory(Role).attr('role', 'ADMIN');
+export const authAdminFactory = new Factory(Role).attr('role', 'ADMIN');
 
 export const UserFactory = new Factory(User)
   .attr('firstName', 'John')
   .attr('lastName', 'Doe')
-  .assocMany('roles', authFactory);
+  .assocMany('roles', authAdminFactory);
 
 // .assocMany → toManyリレーション作成。最後の引数で一気に作る数を指定出来ます
 // .assocOne → toOneリレーションを作成

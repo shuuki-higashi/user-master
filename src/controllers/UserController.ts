@@ -10,9 +10,7 @@ class UserController {
     //Get users from database
     const userRepository = getRepository(User);
     try {
-      const users = await userRepository.find({
-        select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the passwords on response
-      });
+      const users = await userRepository.find();
       //Send the users object
       res.send(users);
       return;

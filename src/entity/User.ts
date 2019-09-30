@@ -6,10 +6,12 @@ import {
   UpdateDateColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { Length } from 'class-validator';
 import * as bcrypt from 'bcryptjs';
 import { Role } from './Role';
+import { Note } from './Note';
 
 interface UserInterface {
   firstName: string;
@@ -47,6 +49,11 @@ export class User {
   @ManyToMany(type => Role, role => role.users, { cascade: true })
   @JoinTable()
   roles?: Array<Role>;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @OneToMany(type => Note, note => note.user, { cascade: true })
+  @JoinTable()
+  notes?: Array<Note>;
 
   constructor(obj?: UserInterface) {
     this.firstName = (obj && obj.firstName) || '';

@@ -4,8 +4,7 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  JoinTable,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm';
 import { Length } from 'class-validator';
 import { User } from './User';
@@ -13,7 +12,6 @@ import { User } from './User';
 interface NoteInterface {
   title: string;
   text: string;
-  user: User | undefined;
 }
 
 @Entity()
@@ -38,13 +36,11 @@ export class Note {
   updatedAt!: Date;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @OneToMany(type => User, user => user.notes)
-  @JoinTable()
-  user?: User | null;
+  @ManyToOne(type => User, user => user.notes)
+  user?: User | undefined;
 
   constructor(obj?: NoteInterface) {
     this.title = (obj && obj.title) || '';
     this.text = (obj && obj.text) || '';
-    this.user = (obj && obj.user) || null;
   }
 }

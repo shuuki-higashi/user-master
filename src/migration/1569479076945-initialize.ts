@@ -36,6 +36,8 @@ export class Initialize1569479076945 implements MigrationInterface {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-explicit-any
   public async down(queryRunner: QueryRunner): Promise<any> {
+    const noteRepository = getRepository(Note);
+    await noteRepository.clear();
     const userRepository = getRepository(User);
     await userRepository.clear();
     const roleRepository = getRepository(Role);

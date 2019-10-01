@@ -22,8 +22,6 @@
     "stage_stop": "sudo docker-compose -f docker/docker-compose.yml down",
     "production": "sudo docker-compose -f docker/docker-compose.prod.yml up",
     "production_stop": "sudo docker-compose -f docker/docker-compose.prod.yml down",
-    "docs": "yarn typedoc && sudo docker-compose -f docker/docker-compose.docs.yml up",
-    "docs_stop": "sudo docker-compose -f docker/docker-compose.docs.yml down",
     "typeorm": "ts-node ./node_modules/typeorm/cli"
   },
   "dependencies": {
@@ -73,6 +71,7 @@
     "sinon": "^7.5.0",
     "sinon-express-mock": "^2.2.1",
     "supertest": "^4.0.2",
+    "swagger-jsdoc": "^3.4.0",
     "ts-jest": "^24.1.0",
     "tsdoc": "^0.0.4",
     "typedoc": "^0.15.0",

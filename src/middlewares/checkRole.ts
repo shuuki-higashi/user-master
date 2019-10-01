@@ -22,7 +22,7 @@ export const checkRole = (
     next: NextFunction
   ): Promise<void> => {
     //Get the user ID from previous middleware
-    const id = res.locals.jwtPayload.userId;
+    const id = res.locals.jwtPayload.id;
 
     //Get user role from the database
     const userRepository = getRepository(User);
@@ -30,17 +30,26 @@ export const checkRole = (
     try {
       user = await userRepository.findOneOrFail(id);
     } catch (id) {
-      res.status(401).send();
+      res.status(401).send('Not found login user id');
     }
 
     //Check if array of authorized roles includes the user's role
-    if (user.roles === null || typeof user.roles === 'undefined') {
-      res.status(401).send();
+    const userRoles = await getRepository(Role).find({
+      relations: ['users'],
+      // where: { id: user.id },
+    });
+    if (userRoles === null || typeof userRoles === 'undefined') {
+      res.status(401).send(`Role undefined ${user.roles}`);
     } else {
-      user.roles.forEach((item: Role) => {
-        if (roleTypes.indexOf(item.role) > -1) next();
-        else res.status(401).send();
+      let flag = false;
+      userRoles.forEach((userRole: Role) => {
+        if (roleTypes.includes(userRole.role)) {
+          flag = true;
+          console.log('user role accepted');
+        }
       });
+      if (flag) next();
+      else res.status(401).send(`Access not allowed with this role`);
     }
   };
 };

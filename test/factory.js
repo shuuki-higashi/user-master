@@ -1,15 +1,15 @@
-// import { Factory } from 'typeorm-factory'
-// エンティティ(モデル)のComment, Author, Postもインポートしておく
+import { Factory } from 'typeorm-factory';
+import { User } from '../src/entity/User';
+import { Role } from '../src/entity/Role';
 
 // .attr → 普通のカラムはこれで作ります
-// .secuence → ユニーク成約等があるカラムの場合はindexを受取る無名関数を使って一意化出来ます
-// export const CommentFactory = new Factory(Comment)
-//     .sequence("text", (i) => `text ${i}`)
-//     .attr("authorName", "John Doe");
+// .sequence → ユニーク成約等があるカラムの場合はindexを受取る無名関数を使って一意化出来ます
+export const authAdminFactory = new Factory(Role).attr('role', 'ADMIN');
 
-// export const AuthorFactory = new Factory(Author)
-//     .sequence("firstName", (i) => `John ${i}`)
-//     .sequence("lastName", (i) => `Doe ${i}`);
+export const UserFactory = new Factory(User)
+  .attr('firstName', 'John')
+  .attr('lastName', 'Doe')
+  .assocMany('roles', authAdminFactory);
 
 // .assocMany → toManyリレーション作成。最後の引数で一気に作る数を指定出来ます
 // .assocOne → toOneリレーションを作成

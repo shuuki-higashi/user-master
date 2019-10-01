@@ -4,8 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
 } from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
+import { User } from './User';
 
 interface RoleInterface {
   role: string;
@@ -16,15 +18,19 @@ export class Role {
   @PrimaryGeneratedColumn()
   readonly id!: number;
 
-  @Column()
+  @Column({ name: 'role' })
   @IsNotEmpty()
   role: string;
 
-  @Column()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @ManyToMany(type => User, user => user.roles)
+  users?: Array<User> | undefined;
+
+  @Column({ name: 'created_at' })
   @CreateDateColumn()
   readonly createdAt!: Date;
 
-  @Column()
+  @Column({ name: 'updated_at' })
   @UpdateDateColumn()
   updatedAt!: Date;
 

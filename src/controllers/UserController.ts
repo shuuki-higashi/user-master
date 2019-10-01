@@ -9,12 +9,15 @@ class UserController {
   static listAll = async (req: Request, res: Response): Promise<void> => {
     //Get users from database
     const userRepository = getRepository(User);
-    const users = await userRepository.find({
-      select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the passwords on response
-    });
-
-    //Send the users object
-    res.send(users);
+    try {
+      const users = await userRepository.find();
+      //Send the users object
+      res.send({ users: users });
+      return;
+    } catch (e) {
+      res.status(404).send('users not found');
+      return;
+    }
   };
 
   static getOneById = async (req: Request, res: Response): Promise<void> => {
@@ -24,11 +27,11 @@ class UserController {
     //Get the user from database
     const userRepository = getRepository(User);
     try {
-      const user = await userRepository.findOneOrFail(id, {
-        select: ['id', 'firstName', 'lastName', 'roles'], //We dont want to send the password on response
-      });
+      const user = await userRepository.findOneOrFail(id);
+      res.send({ user: user });
     } catch (error) {
-      res.status(404).send('User not found');
+      res.status(404).send(`User ${id} not found because ${error}`);
+      return;
     }
   };
 
@@ -57,7 +60,7 @@ class UserController {
     }
 
     //If all ok, send 201 response
-    res.status(201).send('User created');
+    res.status(201).send({ status: 'OK', user: user });
   };
 
   static editUser = async (req: Request, res: Response): Promise<void> => {
@@ -65,7 +68,7 @@ class UserController {
     const id = req.params.id;
 
     //Get values from the body
-    const { firstName, lastName, roles } = req.body;
+    const { firstName, lastName, roles, notes } = req.body;
 
     //Try to find user on database
     const userRepository = getRepository(User);
@@ -74,14 +77,12 @@ class UserController {
       user = await userRepository.findOneOrFail(id);
     } catch (error) {
       //If not found, send a 404 response
-      res.status(404).send('User not found');
+      res.status(404).send('User to edit not found');
       return;
     }
 
     //Validate the new values on model
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.roles = roles;
+    user.update({ firstName, lastName, password: user.password, roles, notes });
     const errors = await validate(user);
     if (errors.length > 0) {
       res.status(400).send(errors);
@@ -96,7 +97,7 @@ class UserController {
       return;
     }
     //After all send a 204 (no content, but accepted) response
-    res.status(204).send();
+    res.status(204).send({ status: 'OK', user: user });
   };
 
   static deleteUser = async (req: Request, res: Response): Promise<void> => {
@@ -108,13 +109,13 @@ class UserController {
     try {
       user = await userRepository.findOneOrFail(id);
     } catch (error) {
-      res.status(404).send('User not found');
+      res.status(404).send('User to delete not found');
       return;
     }
     await userRepository.delete(id);
 
     //After all send a 204 (no content, but accepted) response
-    res.status(204).send();
+    res.status(204).send({ status: 'OK', user: user });
   };
 }
 

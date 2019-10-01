@@ -65,12 +65,14 @@ export class User {
   }
 
   /// no commit with update
-  update(obj?: UserInterface) {
+  update(obj?: UserInterface): User {
     this.firstName = (obj && obj.firstName) || this.firstName;
     this.lastName = (obj && obj.lastName) || this.lastName;
     this.password = (obj && obj.password) || this.password;
     this.roles = (obj && obj.roles) || this.roles;
     this.notes = (obj && obj.notes) || this.notes;
+
+    return this;
   }
 
   checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean {

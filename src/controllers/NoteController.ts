@@ -42,8 +42,7 @@ class NoteController {
     const userRepository = getRepository(User);
     try {
       const noteUser: User | undefined = await userRepository.findOne(user);
-      note = new Note({ title, text });
-      note.user = noteUser;
+      note = new Note({ title, text, user: noteUser });
     } catch (e) {
       res.status(400).send('invalid user');
       return;

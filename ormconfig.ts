@@ -1,5 +1,3 @@
-import TypeOrmNamingStrategy from './src/config/TypeORMStrategy';
-
 const ORMConfig = {
   type: 'sqlite',
   database: 'dev.sqlite',
@@ -13,7 +11,6 @@ const ORMConfig = {
     migrationsDir: 'src/migration',
     subscribersDir: 'src/subscriber',
   },
-  namingStrategy: new TypeOrmNamingStrategy(),
 };
 
 // typeORM の雑魚設定に合わせる

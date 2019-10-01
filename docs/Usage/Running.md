@@ -1,7 +1,11 @@
 # Running programs
-## for local 
+## Summary
+1. tset
+2. test2
 
-1. Add yarn packages
+## 1. for local 
+
+1-1. Add node packages
 ```shell script
 cd $PROJECT_ROOT
 # (Please replace $PROJECT_ROOT with Download folder of this repository)
@@ -9,7 +13,8 @@ yarn install
 # node_modules/.bin にPATHを通すか, 以下を実行する
 yarn global add eslint eslint-config-node prettier eslint-config-prettier eslint-plugin-prettier husky lint-staged mocha 
 ```
-2. Run script
+
+1-2. Run script
 ```shell script
 # create `.env` file in Project_root 
 # and write `PORT=3000` when you change server port to 3000
@@ -19,9 +24,9 @@ yarn dev
 # (you can close this server by ctrl-C)
 ``` 
 
-## for prod/stage
+## 2. for prod/stage
 
-1. use docker from command
+2-1. use docker from command
 ```shell script
 cd $PROJECT_ROOT
 yarn

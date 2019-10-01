@@ -6,4 +6,4 @@
 - [DB](https://github.com/kkiyama117/express_docker/blob/master/docs/markdown/How_to/Database.md)
 - [Express](https://github.com/kkiyama117/express_docker/blob/master/docs/markdown/How_to/Express.md)
 
-You can see typescript typedoc with `yarn docs` after installing as written in [Prepare](https://github.com/kkiyama117/express_docker/blob/master/docs/markdown/Usage/Install.md))
+You can see typescript typedoc at `http://localhost/` with running `yarn stage` after installing as written in [Prepare](https://github.com/kkiyama117/express_docker/blob/master/docs/markdown/Usage/Install.md))

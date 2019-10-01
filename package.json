@@ -22,9 +22,7 @@
     "stage_stop": "sudo docker-compose -f docker/docker-compose.yml down",
     "production": "sudo docker-compose -f docker/docker-compose.prod.yml up",
     "production_stop": "sudo docker-compose -f docker/docker-compose.prod.yml down",
-    "typeorm": "ts-node ./node_modules/typeorm/cli",
-    "migration:generate": "yarn typeorm migration:generate",
-    "migration:run": "yarn typeorm migration:run"
+    "typeorm": "ts-node ./node_modules/typeorm/cli"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

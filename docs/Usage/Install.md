@@ -1,5 +1,5 @@
 #  Download and Install to Develop
-## Preparation
+## Summary
 
 1. Install some tools needed for running(see below).
 2. Download repository folder.
@@ -26,11 +26,14 @@ If you use Docker (for staging or production) , you should install Docker and Do
   - [Win](https://docs.docker.com/docker-for-windows/install/)
 - [Docker-compose](https://docs.docker.com/compose/install/)
 
-### 2. repo
+## 2. repo
 Download by git 
 
-#### ssh
+### ssh
 `git clone git@github.com:kkiyama117/express_docker.git`
-#### http
+### http
 `git clone https://github.com/kkiyama117/express_docker.git`
 
+## 3. go to next
+- To run server, see [Running](https://github.com/kkiyama117/express_docker/blob/master/docs/Usage/Running.md)
+- For test, see [Test](https://github.com/kkiyama117/express_docker/blob/master/docs/Usage/Test.md)

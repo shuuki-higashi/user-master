@@ -8,7 +8,13 @@ export const checkJwt = (
   next: NextFunction
 ): void => {
   //Get the jwt token from the head
-  const token = req.headers['token'] as string;
+  const bearerTokens = (req.headers['authorization'] as string).split(' ');
+  if (bearerTokens[0].toLowerCase() !== 'bearer:') {
+    //If token is not valid, respond with 401 (unauthorized)
+    res.status(401).send('Invalid token2');
+    return;
+  }
+  const token = bearerTokens[1];
   let jwtPayload;
 
   //Try to validate the token and get data

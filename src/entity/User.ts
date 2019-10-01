@@ -16,8 +16,9 @@ import { Note } from './Note';
 interface UserInterface {
   firstName: string;
   lastName: string;
-  roles: Array<Role>;
   password: string;
+  roles: Array<Role>;
+  notes?: Array<Note> | undefined;
 }
 
 @Entity()
@@ -60,6 +61,16 @@ export class User {
     this.lastName = (obj && obj.lastName) || '';
     this.password = (obj && obj.password) || '';
     this.roles = obj && obj.roles;
+    this.notes = (obj && obj.notes) || undefined;
+  }
+
+  /// no commit with update
+  update(obj?: UserInterface) {
+    this.firstName = (obj && obj.firstName) || this.firstName;
+    this.lastName = (obj && obj.lastName) || this.lastName;
+    this.password = (obj && obj.password) || this.password;
+    this.roles = (obj && obj.roles) || this.roles;
+    this.notes = (obj && obj.notes) || this.notes;
   }
 
   checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean {

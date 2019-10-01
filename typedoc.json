@@ -1,0 +1,8 @@
+{
+  "mode": "modules",
+  "out": "docs",
+  "name": "express_docker example",
+  "includeDeclarations": true,
+  "excludeExternals": true,
+  "exclude": ["bin/www.ts", "src/config/*", "ormconfig.ts"]
+}

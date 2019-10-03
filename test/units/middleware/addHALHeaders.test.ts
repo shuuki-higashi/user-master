@@ -12,7 +12,7 @@ describe('Unit_addHALHeaders_middleware', () => {
       status: jest.fn().mockReturnThis(),
     });
     const next = jest.fn();
-    halMiddleware(req, res, next);
+    halMiddleware()(req, res, next);
     expect(res.setHeader).toHaveBeenCalledWith(
       'content-type',
       'application/hal+json; charset=utf-8'

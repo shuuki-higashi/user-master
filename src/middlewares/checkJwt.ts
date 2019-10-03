@@ -25,7 +25,7 @@ export const checkJwt = (
   } catch (error) {
     //If token is not valid, respond with 401 (unauthorized)
     res.status(401).send('Invalid token');
-    return;
+    next();
   }
 
   //The token is valid for 1 hour

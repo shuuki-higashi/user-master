@@ -1,10 +1,4 @@
-import {
-  NextFunction,
-  Request,
-  RequestHandler,
-  Response,
-  Router,
-} from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import yaml from 'yamljs';
 
 const swaggerYAML = yaml.load('./src/routes/OPENAPI.yaml');
@@ -24,5 +18,3 @@ export const openAPIJSONMiddleware = (): Router => {
   r.get('/', swaggerJson);
   return r;
 };
-
-export default swaggerYAML;

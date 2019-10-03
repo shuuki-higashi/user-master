@@ -5,7 +5,6 @@ import auth from './auth';
 
 const routes = Router();
 
-/* GET home page. */
 routes.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.json({
     message: 'test',

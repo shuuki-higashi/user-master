@@ -27,9 +27,8 @@ createConnection().then(async () => {
   app.use(halMiddleware());
   app.use(errorMiddleware());
   if (process.env.NODE_ENV != 'production') {
-    app.use(swaggerUiExpress.serve);
-    app.use('/docs', apiDoc);
-    app.use(openAPIJSONMiddleware('docs'));
+    app.use('/docs', swaggerUiExpress.serve, apiDoc);
+    app.use('/docs.json', openAPIJSONMiddleware());
   }
   app.get('/', routes);
 });

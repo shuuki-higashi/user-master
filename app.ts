@@ -10,8 +10,7 @@ import * as path from 'path';
 import halMiddleware from './src/middlewares/addHALHeaders';
 import errorMiddleware from './src/middlewares/error';
 import { createConnection } from 'typeorm';
-import apiDoc, { openAPIJSONMiddleware } from './src/middlewares/openAPIDoc';
-import swaggerUiExpress = require('swagger-ui-express');
+import { openAPIJSONMiddleware } from './src/middlewares/openAPIDoc';
 
 const app = express();
 createConnection().then(async () => {
@@ -26,8 +25,7 @@ createConnection().then(async () => {
   // Add HAL header
   app.use(halMiddleware());
   app.use(errorMiddleware());
-  if (process.env.NODE_ENV != 'production') {
-    app.use('/docs', swaggerUiExpress.serve, apiDoc);
+  if (process.env.NODE_ENV === 'development') {
     app.use('/docs.json', openAPIJSONMiddleware());
   }
   app.get('/', routes);

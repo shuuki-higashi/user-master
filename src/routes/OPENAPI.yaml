@@ -302,18 +302,29 @@ paths:
           description: User not found
     delete:
       tags:
-        - user
+        - User
       summary: Delete user
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-        - name: username
+        - name: userId
           in: path
           description: The name that needs to be deleted
           required: true
           schema:
             type: string
       responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  user:
+                    $ref: "#/components/schemas/User"
         "400":
           description: Invalid username supplied
         "404":
@@ -348,6 +359,10 @@ components:
   schemas:
     User:
       type: object
+      required:
+        - id
+        - firstName
+        - lastName
       properties:
         id:
           type: integer
@@ -359,9 +374,9 @@ components:
         password:
           type: string
         roles:
-          type: integer
-          format: int32
-          description: User Roles
+          type: array
+          items:
+            $ref: "#/components/schemas/Role"
     Note:
       type: object
       required:
@@ -374,8 +389,17 @@ components:
         title:
           type: string
           example: note_1
-        users:
-          $ref: "#/components/schemas/Note"
+        user:
+          $ref: "#/components/schemas/User"
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          example: "ADMIN"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"

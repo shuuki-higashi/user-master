@@ -25,9 +25,9 @@ createConnection().then(async () => {
   // Add HAL header
   app.use(halMiddleware());
   app.use(errorMiddleware());
-  // if (process.env.NODE_ENV === 'development') {
-  //   app.use('/docs.json', openAPIJSONMiddleware());
-  // }
+  if (process.env.NODE_ENV === 'development') {
+    app.use('/docs.json', openAPIJSONMiddleware());
+  }
   app.get('/', routes);
 });
 

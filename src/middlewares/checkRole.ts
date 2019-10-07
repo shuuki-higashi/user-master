@@ -29,6 +29,7 @@ export const checkRole = (
     let user!: User;
     try {
       user = await userRepository.findOneOrFail(id);
+      next();
     } catch (id) {
       res.status(401).send('Not found login user id');
     }
@@ -40,6 +41,7 @@ export const checkRole = (
     });
     if (userRoles === null || typeof userRoles === 'undefined') {
       res.status(401).send(`Role undefined ${user.roles}`);
+      next();
     } else {
       let flag = false;
       userRoles.forEach((userRole: Role) => {
@@ -50,6 +52,7 @@ export const checkRole = (
       });
       if (flag) next();
       else res.status(401).send(`Access not allowed with this role`);
+      next();
     }
   };
 };

@@ -28,7 +28,7 @@ createConnection().then(async () => {
   if (process.env.NODE_ENV === 'development') {
     app.use('/docs.json', openAPIJSONMiddleware());
   }
-  app.get('/', routes);
+  app.use('/', routes);
 });
 
 export default app;

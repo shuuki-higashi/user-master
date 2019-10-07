@@ -19,20 +19,14 @@ router.get(
   NoteController.getOneById
 );
 
-/// Create a new user
 router.post(
   '/',
   [checkJwt, checkRole(['ADMIN', 'NORMAL'])],
   NoteController.newNote
 );
-router.post(
-  '/new',
-  [checkJwt, checkRole(['ADMIN', 'NORMAL'])],
-  NoteController.newNote
-);
 
 /// Edit one user
-router.patch(
+router.post(
   '/:id([0-9]+)',
   [checkJwt, checkRole(['ADMIN', 'NORMAL'])],
   NoteController.editNote

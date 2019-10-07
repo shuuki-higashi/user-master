@@ -6,21 +6,22 @@ import { User } from '../entity/User';
 import toHash from '../utils/to_hash';
 
 class UserController {
-  static listAll = async (req: Request, res: Response): Promise<void> => {
+  static listAll = async (req: Request, res: Response): Promise<Response> => {
     //Get users from database
     const userRepository = getRepository(User);
     try {
       const users = await userRepository.find();
       //Send the users object
-      res.send({ users: users });
-      return;
+      return res.send({ users: users });
     } catch (e) {
-      res.status(404).send('users not found');
-      return;
+      return res.status(404).send('users not found');
     }
   };
 
-  static getOneById = async (req: Request, res: Response): Promise<void> => {
+  static getOneById = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
     //Get the ID from the url
     const id = req.params.id;
 
@@ -28,14 +29,13 @@ class UserController {
     const userRepository = getRepository(User);
     try {
       const user = await userRepository.findOneOrFail(id);
-      res.send({ user: user });
+      return res.send({ user: user });
     } catch (error) {
-      res.status(404).send(`User ${id} not found because ${error}`);
-      return;
+      return res.status(404).send(`User ${id} not found because ${error}`);
     }
   };
 
-  static newUser = async (req: Request, res: Response): Promise<void> => {
+  static newUser = async (req: Request, res: Response): Promise<Response> => {
     //Get parameters from the body
     const { firstName, lastName, password, roles } = req.body;
     const user = new User({ firstName, lastName, roles, password });
@@ -43,8 +43,7 @@ class UserController {
     //Validate if the parameters are ok
     const errors = await validate(user);
     if (errors.length > 0) {
-      res.status(400).send(errors);
-      return;
+      return res.status(400).send(errors);
     }
 
     //Hash the password, to securely store on DB
@@ -55,15 +54,14 @@ class UserController {
     try {
       await userRepository.save(user);
     } catch (e) {
-      res.status(409).send('name already in use');
-      return;
+      return res.status(409).send('name already in use');
     }
 
     //If all ok, send 201 response
-    res.status(201).send({ status: 'OK', user: user });
+    return res.status(201).send({ status: 'OK', user: user });
   };
 
-  static editUser = async (req: Request, res: Response): Promise<void> => {
+  static editUser = async (req: Request, res: Response): Promise<Response> => {
     //Get the ID from the url
     const id = req.params.id;
 
@@ -77,30 +75,30 @@ class UserController {
       user = await userRepository.findOneOrFail(id);
     } catch (error) {
       //If not found, send a 404 response
-      res.status(404).send('User to edit not found');
-      return;
+      return res.status(404).send('User to edit not found');
     }
 
     //Validate the new values on model
     user.update({ firstName, lastName, password: user.password, roles, notes });
     const errors = await validate(user);
     if (errors.length > 0) {
-      res.status(400).send(errors);
-      return;
+      return res.status(400).send(errors);
     }
 
     //Try to safe, if fails, that means name already in use
     try {
       await userRepository.save(user);
     } catch (e) {
-      res.status(409).send('name already in use');
-      return;
+      return res.status(409).send('name already in use');
     }
     //After all send a 204 (no content, but accepted) response
-    res.status(204).send({ status: 'OK', user: user });
+    return res.status(204).send({ status: 'OK', user: user });
   };
 
-  static deleteUser = async (req: Request, res: Response): Promise<void> => {
+  static deleteUser = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
     //Get the ID from the url
     const id = req.params.id;
 
@@ -109,13 +107,12 @@ class UserController {
     try {
       user = await userRepository.findOneOrFail(id);
     } catch (error) {
-      res.status(404).send('User to delete not found');
-      return;
+      return res.status(404).send('User to delete not found');
     }
     await userRepository.delete(id);
 
     //After all send a 204 (no content, but accepted) response
-    res.status(204).send({ status: 'OK', user: user });
+    return res.status(204).send({ status: 'OK', user: user });
   };
 }
 

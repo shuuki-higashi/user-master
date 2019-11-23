@@ -37,8 +37,8 @@ class UserController {
 
   static newUser = async (req: Request, res: Response): Promise<Response> => {
     //Get parameters from the body
-    const { firstName, lastName, password, roles } = req.body;
-    const user = new User({ firstName, lastName, roles, password });
+    const { userName, password, email } = req.body;
+    const user = new User({ userName, password, email });
 
     //Validate if the parameters are ok
     const errors = await validate(user);
@@ -66,7 +66,7 @@ class UserController {
     const id = req.params.id;
 
     //Get values from the body
-    const { firstName, lastName, roles, notes } = req.body;
+    const { userName, password, email } = req.body;
 
     //Try to find user on database
     const userRepository = getRepository(User);
@@ -79,7 +79,7 @@ class UserController {
     }
 
     //Validate the new values on model
-    user.update({ firstName, lastName, password: user.password, roles, notes });
+    user.update({ userName, password: user.password, email });
     const errors = await validate(user);
     if (errors.length > 0) {
       return res.status(400).send(errors);

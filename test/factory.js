@@ -1,6 +1,5 @@
 import { Factory } from 'typeorm-factory';
 import { User } from '../src/entity/User';
-import { Role } from '../src/entity/Role';
 
 // .attr → 普通のカラムはこれで作ります
 // .sequence → ユニーク成約等があるカラムの場合はindexを受取る無名関数を使って一意化出来ます
